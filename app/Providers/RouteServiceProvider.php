@@ -19,6 +19,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
+    public const NAVBAR = [
+        'Dashboard' => 'dashboard',
+        'Vehicles' => 'vehicles.index'
+    ];
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *

@@ -13,4 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'MainController@index');
+Route::get('/', 'MainController@dashboard')->name('dashboard');
+Route::resource('vehicles', 'VehiclesController');
+Route::prefix('services')->name('services.')->group(function() {
+    Route::get('/new/{vehicle}', 'ServiceController@create')->name('create');
+    Route::post('/new/{vehicle}', 'ServiceController@store')->name('store');
+    Route::get('/{service}', 'ServiceController@edit')->name('edit');
+    Route::delete('/{service}', 'ServiceController@destroy')->name('destroy');
+});

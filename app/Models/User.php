@@ -42,4 +42,8 @@ class User extends Authenticatable
 
     protected $keyType = 'string';
     public $incrementing = false;
+
+    public function vehicles() {
+        return $this->hasMany('\App\Models\Vehicle');
+    }
 }

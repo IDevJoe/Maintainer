@@ -95,6 +95,7 @@ class EnsureJwtAuth
             return $user;
         });
 
+        // Everything is good here, Jim. Send to the controller.
         return $next($request);
     }
 }
