@@ -23,7 +23,7 @@
             </div>
         </div>
     </nav>
-    <div class="mt-5 mb-5 container">
+    <div class="mt-5 mb-5 container{{ isset($cfluid) ? '-fluid' : '' }}">
         @yield('content')
     </div>
 @endsection

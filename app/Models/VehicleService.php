@@ -50,4 +50,16 @@ class VehicleService extends Model
         $cp = Carbon::parse($this->last_serviced);
         return $cp->addDays($this->frequency)->toDateString();
     }
+
+    public function getDueAttribute() {
+        if($this->last_serviced == null) return true;
+        if($this->frequency_type == "mi") {
+            $ns = $this->last_mileage + $this->frequency;
+            if($this->vehicle->miles >= $ns) return true;
+        } else {
+            $cp = Carbon::parse($this->last_serviced)->addDays($this->frequency);
+            if($cp->isPast()) return true;
+        }
+        return false;
+    }
 }

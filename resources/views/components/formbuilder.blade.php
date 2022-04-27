@@ -25,6 +25,8 @@
                             {{ $col['label'] }}
                         </label>
                     </div>
+                @elseif(isset($col['type']) && $col['type'] == 'textarea')
+                    <textarea class="form-control{{ $errors->has($colname) ? ' is-invalid' : '' }}" id="{{ $colname }}" name="{{ $colname }}" {{ isset($col['readonly']) && $col['readonly'] ? 'readonly' : null }} {{ isset($col['disabled']) && $col['disabled'] ? 'disabled' : null }} {{ isset($col['required']) && $col['required'] ? 'required' : null }}>{{ $colval }}</textarea>
                 @else
                     <input id="{{ $colname }}" type="{{ $col['type'] ?? 'text'  }}" autocomplete="off" value="{{ $colval }}" name="{{ $colname }}" {{ isset($col['readonly']) && $col['readonly'] ? 'readonly' : null }} {{ isset($col['disabled']) && $col['disabled'] ? 'disabled' : null }} {{ isset($col['required']) && $col['required'] ? 'required' : null }} class="form-control{{ $errors->has($colname) ? ' is-invalid' : '' }}" />
                 @endif

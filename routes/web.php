@@ -21,3 +21,13 @@ Route::prefix('services')->name('services.')->group(function() {
     Route::get('/{service}', 'ServiceController@edit')->name('edit');
     Route::delete('/{service}', 'ServiceController@destroy')->name('destroy');
 });
+Route::prefix('maintenance')->name('maint.')->group(function() {
+    Route::post('/new/{vehicle}', 'MaintController@newWorksheet')->name('create');
+    Route::get('/{worksheet}', 'MaintController@showSheet')->name('showsheet');
+    Route::patch('/{worksheet}', 'MaintController@update')->name('update');
+    Route::post('/{worksheet}/service', 'MaintController@addService')->name('addservice');
+    Route::post('/{worksheet}/service/all', 'MaintController@addDueServices')->name('dueservice');
+    Route::delete('/{worksheet}/service/{service}', 'MaintController@removeService')->name('remservice');
+    Route::delete('/{worksheet}', 'MaintController@deleteSheet')->name('delsheet');
+    Route::put('/{worksheet}', 'MaintController@closeSheet')->name('closesheet');
+});

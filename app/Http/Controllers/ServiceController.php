@@ -37,4 +37,11 @@ class ServiceController extends Controller
             abort(403);
         return view('services.form', ['serv' => $service]);
     }
+
+    public function destroy(Request $request, VehicleService $service) {
+        if($request->user()->id != $service->vehicle->user_id)
+            abort(403);
+        $service->delete();
+        return redirect()->route('vehicles.show', ['vehicle' => $service->vehicle])->with('service_message', 'Service deleted.');
+    }
 }
