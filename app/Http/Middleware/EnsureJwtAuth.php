@@ -60,7 +60,7 @@ class EnsureJwtAuth
             return response("Supplied authentication is invalid (1)", 403);
         }
 
-        if(!array_search(env('JWT_AUDIENCE'), $decoded->aud)) {
+        if(array_search(env('JWT_AUDIENCE'), $decoded->aud) === false) {
             return response("Supplied authentication is invalid (2)", 403);
         }
 
@@ -87,7 +87,6 @@ class EnsureJwtAuth
 
         // Add parameters to request
         $request->merge([
-            'session_id' => $decoded->nonce,
             'session_expiry' => $decoded->exp,
             'user_email' => $decoded->email,
             'user' => $user
