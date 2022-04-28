@@ -1,5 +1,5 @@
 services:
     maintainer:
-        image: idevjoe/maintainer:1.0
+        image: idevjoe/maintainer:1.0.1
         ports:
             - "80:80"

@@ -46,11 +46,14 @@ class EnsureJwtAuth
             $keyfile = file_get_contents($dlurl);
             Storage::disk('local')->put('jwtpub.pem', $keyfile);
         }
-
-        $key = new Key($keyfile, 'RS256');
+        $key_js = json_decode($keyfile);
+        $keys = [];
+        foreach($key_js->public_certs as $crt) {
+            array_push($keys, new Key($crt->cert, 'RS256'));
+        }
         $decoded = null;
         try {
-            $decoded = JWT::decode($jwt, $key);
+            $decoded = JWT::decode($jwt, $keys);
         } catch(\Exception $e) {
             return response("Supplied authentication is invalid (0)", 403);
         }
