@@ -19,6 +19,7 @@ Route::prefix('services')->name('services.')->group(function() {
     Route::get('/new/{vehicle}', 'ServiceController@create')->name('create');
     Route::post('/new/{vehicle}', 'ServiceController@store')->name('store');
     Route::get('/{service}', 'ServiceController@edit')->name('edit');
+    Route::patch('/{service}', 'ServiceController@update')->name('update');
     Route::delete('/{service}', 'ServiceController@destroy')->name('destroy');
 });
 Route::prefix('maintenance')->name('maint.')->group(function() {

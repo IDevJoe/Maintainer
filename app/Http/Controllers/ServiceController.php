@@ -38,6 +38,21 @@ class ServiceController extends Controller
         return view('services.form', ['serv' => $service]);
     }
 
+    public function update(Request $request, VehicleService $service) {
+        if($request->user()->id != $service->vehicle->user_id)
+            abort(403);
+        $this->validate($request, [
+            'description' => 'required|string|max:250',
+            'frequency_type' => 'required|string|max:5',
+            'frequency' => 'required|integer|min:0'
+        ]);
+        $service->description = $request->post('description');
+        $service->frequency_type = $request->post('frequency_type');
+        $service->frequency = $request->post('frequency');
+        $service->save();
+        return redirect()->route('vehicles.show', ['vehicle' => $service->vehicle])->with('service_message', 'Service updated.');
+    }
+
     public function destroy(Request $request, VehicleService $service) {
         if($request->user()->id != $service->vehicle->user_id)
             abort(403);

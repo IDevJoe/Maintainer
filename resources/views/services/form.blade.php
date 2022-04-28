@@ -9,7 +9,7 @@
         <h1>Creating service</h1>
         <h4 class="text-muted">{{ $veh->year }} {{ $veh->make }} {{ $veh->model }} ({{ $veh->color }})</h4>
     @endif
-    <form action="{{ isset($serv) ? '' : route('services.store', ['vehicle' => $veh]) }}" method="POST">
+    <form action="{{ isset($serv) ? route('services.update', ['service' => $serv]) : route('services.store', ['vehicle' => $veh]) }}" method="POST">
         @csrf
         @method(isset($serv) ? 'PATCH' : 'POST')
         @include('components.formbuilder', ['form' => \App\Models\VehicleService::SERVICE_FORM, 'model' => isset($serv) ? $serv : null])
