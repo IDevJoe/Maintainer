@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\User;
 use Carbon\Carbon;
 use Closure;
+use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Http\Request;
@@ -47,10 +48,7 @@ class EnsureJwtAuth
             Storage::disk('local')->put('jwtpub.pem', $keyfile);
         }
         $key_js = json_decode($keyfile);
-        $keys = [];
-        foreach($key_js->public_certs as $crt) {
-            array_push($keys, new Key($crt->cert, 'RS256'));
-        }
+        $keys = JWK::parseKeySet($key_js);
         $decoded = null;
         try {
             $decoded = JWT::decode($jwt, $keys);

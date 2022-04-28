@@ -14,7 +14,7 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 RUN apt-get update && \
     apt-get -y install tzdata cron && \
-    docker-php-ext-install pdo
+    docker-php-ext-install pdo pdo_mysql
 RUN cp /usr/share/zoneinfo/America/Chicago /etc/localtime && \
     echo "America/Chicago" > /etc/timezone
 COPY --from=composer /app /var/www/html
