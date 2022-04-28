@@ -47,7 +47,7 @@ class EnsureJwtAuth
             $keyfile = file_get_contents($dlurl);
             Storage::disk('local')->put('jwtpub.pem', $keyfile);
         }
-        $key_js = json_decode($keyfile);
+        $key_js = json_decode($keyfile, true);
         $keys = JWK::parseKeySet($key_js);
         $decoded = null;
         try {
@@ -60,7 +60,7 @@ class EnsureJwtAuth
             return response("Supplied authentication is invalid (1)", 403);
         }
 
-        if($decoded->aud != env('JWT_AUDIENCE')) {
+        if(!array_search(env('JWT_AUDIENCE'), $decoded->aud)) {
             return response("Supplied authentication is invalid (2)", 403);
         }
 
