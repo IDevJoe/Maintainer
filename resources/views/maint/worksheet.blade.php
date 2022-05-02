@@ -61,7 +61,7 @@
             @csrf
             @method('PATCH')
             @include('components.formbuilder', ['form' => \App\Models\ServiceWorksheet::INFO_FORM, 'model' => $ws])
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center d-print-none">
                 <button class="btn btn-primary">Update Information</button>
             </div>
         </form>
@@ -93,7 +93,7 @@
         <thead class="table-light">
             <tr>
                 <th>Description</th>
-                <th>Actions</th>
+                <th class="d-print-none">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -110,7 +110,7 @@
                             <span class="badge bg-secondary">Due</span>
                         @endif
                     </td>
-                    <td>
+                    <td class="d-print-none">
                         @if($ws->closed_at == null)
                             <form action="{{ route('maint.remservice', ['worksheet' => $ws, 'service' => $serv]) }}" method="POST">
                                 @csrf
@@ -123,7 +123,7 @@
             @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-end mb-5">
+    <div class="d-flex justify-content-end mb-5 d-print-none">
         @if($ws->closed_at == null)
             <form action="{{ route('maint.addservice', ['worksheet' => $ws]) }}" method="POST">
                 @csrf
@@ -146,17 +146,19 @@
         @endif
     </div>
     @if($ws->closed_at == null)
-        <h5>FINAL ACTIONS</h5>
-        <button class="btn btn-outline-success" name="action" value="close" type="button" onclick="closeSheet()">Close Worksheet</button>
-        <button class="btn btn-outline-danger" name="action" value="delete" type="button" onclick="deleteSheet()">Delete Worksheet</button>
-        <form action="{{ route('maint.delsheet', ['worksheet' => $ws]) }}" id="delsheet" method="POST">
-            @csrf
-            @method('DELETE')
-        </form>
-        <form action="{{ route('maint.closesheet', ['worksheet' => $ws]) }}" id="closesheet" method="POST">
-            @csrf
-            @method('PUT')
-        </form>
+        <div class="d-print-none">
+            <h5>FINAL ACTIONS</h5>
+            <button class="btn btn-outline-success" name="action" value="close" type="button" onclick="closeSheet()">Close Worksheet</button>
+            <button class="btn btn-outline-danger" name="action" value="delete" type="button" onclick="deleteSheet()">Delete Worksheet</button>
+            <form action="{{ route('maint.delsheet', ['worksheet' => $ws]) }}" id="delsheet" method="POST">
+                @csrf
+                @method('DELETE')
+            </form>
+            <form action="{{ route('maint.closesheet', ['worksheet' => $ws]) }}" id="closesheet" method="POST">
+                @csrf
+                @method('PUT')
+            </form>
+        </div>
     @endif
 @endsection
 

@@ -5,7 +5,7 @@
 @endsection
 
 @section('base_content')
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-print-none">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Maintainer</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">

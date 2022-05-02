@@ -1,7 +1,0 @@
-services:
-    maintainer:
-        image: idevjoe/maintainer:1.0.1
-        ports:
-            - "80:80"
-        environment:
-            JWT_PUBLIC_KEY_LOCATION: https://devjoe.cloudflareaccess.com/cdn-cgi/access/certs
