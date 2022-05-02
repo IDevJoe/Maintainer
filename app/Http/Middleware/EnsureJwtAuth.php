@@ -48,7 +48,11 @@ class EnsureJwtAuth
             Storage::disk('local')->put('jwtpub.pem', $keyfile);
         }
         $key_js = json_decode($keyfile, true);
-        $keys = JWK::parseKeySet($key_js);
+        $keys = null;
+        if($key_js != null)
+            $keys = JWK::parseKeySet($key_js);
+        else
+            $keys = new Key($keyfile, 'RS256');
         $decoded = null;
         try {
             $decoded = JWT::decode($jwt, $keys);
