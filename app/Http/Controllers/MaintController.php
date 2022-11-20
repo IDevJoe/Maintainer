@@ -26,6 +26,12 @@ class MaintController extends Controller
         return view('maint.worksheet', ['ws' => $worksheet]);
     }
 
+    public function showSheetText(Request $request, ServiceWorksheet $worksheet) {
+        if($worksheet->vehicle->user_id != $request->user()->id)
+            abort(403);
+        return view('maint.printfriendly', ['ws' => $worksheet]);
+    }
+
     public function update(Request $request, ServiceWorksheet $worksheet) {
         if($worksheet->vehicle->user_id != $request->user()->id)
             abort(403);
