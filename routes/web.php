@@ -25,6 +25,7 @@ Route::prefix('services')->name('services.')->group(function() {
 Route::prefix('maintenance')->name('maint.')->group(function() {
     Route::post('/new/{vehicle}', 'MaintController@newWorksheet')->name('create');
     Route::get('/{worksheet}', 'MaintController@showSheet')->name('showsheet');
+    Route::get('/{worksheet}/text', 'MaintController@showSheetText')->name('showsheet.text');
     Route::patch('/{worksheet}', 'MaintController@update')->name('update');
     Route::post('/{worksheet}/service', 'MaintController@addService')->name('addservice');
     Route::post('/{worksheet}/service/all', 'MaintController@addDueServices')->name('dueservice');

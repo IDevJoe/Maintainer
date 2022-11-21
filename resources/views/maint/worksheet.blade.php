@@ -9,9 +9,6 @@
             font-family: 'Libre Barcode 39 Text', cursive;
             font-size: 2em;
         }
-        .workdesc {
-            white-space: pre-line;
-        }
     </style>
 @endsection
 
@@ -26,6 +23,9 @@
         @endif
     </h4>
     <hr>
+    <a href="{{ route('maint.showsheet.text', ['worksheet' => $ws]) }}" class="btn btn-sm btn-outline-secondary d-print-none mb-4">
+        Text Version
+    </a>
     <h5>VEHICLE INFORMATION</h5>
     <div class="row mt-5">
         <div class="col-md text-center">
