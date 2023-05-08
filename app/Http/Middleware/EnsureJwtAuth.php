@@ -58,6 +58,7 @@ class EnsureJwtAuth
             $decoded = JWT::decode($jwt, $keys);
         } catch(\Exception $e) {
             return response("Supplied authentication is invalid (0)", 403);
+            error_log($e->getMessage());
         }
 
         if($decoded->iss != env('JWT_ISSUER')) {
